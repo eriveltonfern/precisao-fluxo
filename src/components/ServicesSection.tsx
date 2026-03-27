@@ -1,8 +1,10 @@
 import { whatsappLink } from "./WhatsAppButton";
 import { Link } from "react-router-dom";
-import { services } from "@/data/services";
+import { useServices, getFallbackImage } from "@/hooks/useData";
 
 const ServicesSection = () => {
+  const { data: services, isLoading } = useServices();
+
   return (
     <section id="servicos" className="py-20 md:py-28 bg-secondary">
       <div className="container">
@@ -16,33 +18,41 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => (
-            <Link
-              key={service.slug}
-              to={`/servicos/${service.slug}`}
-              className="group overflow-hidden rounded-2xl bg-card shadow-sm border border-border transition-all hover:shadow-lg hover:border-primary/30 hover:-translate-y-1"
-            >
-              <div className="overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  width={768}
-                  height={512}
-                  loading="lazy"
-                  className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="font-display text-lg font-bold text-foreground">{service.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{service.desc}</p>
-                <span className="mt-3 inline-block text-sm font-semibold text-primary group-hover:underline">
-                  Saiba mais →
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="rounded-2xl bg-card border border-border h-72 animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {services?.map((service) => (
+              <Link
+                key={service.slug}
+                to={`/servicos/${service.slug}`}
+                className="group overflow-hidden rounded-2xl bg-card shadow-sm border border-border transition-all hover:shadow-lg hover:border-primary/30 hover:-translate-y-1"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={service.image_url || getFallbackImage(service.slug)}
+                    alt={service.title}
+                    width={768}
+                    height={512}
+                    loading="lazy"
+                    className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-5">
+                  <h3 className="font-display text-lg font-bold text-foreground">{service.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{service.description}</p>
+                  <span className="mt-3 inline-block text-sm font-semibold text-primary group-hover:underline">
+                    Saiba mais →
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
