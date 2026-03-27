@@ -8,18 +8,20 @@ const Footer = () => {
   const { data: cities } = useCities();
   const { data: s } = useSettings();
 
+  const companyName = s?.company_name || "Desentupidora Precisão";
+
   return (
     <footer className="bg-primary-dark text-white/80 pt-16 pb-8">
       <div className="container">
-        <div className="grid gap-10 md:grid-cols-4 mb-12">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 mb-12">
           <div>
-            <h3 className="font-display text-xl font-bold text-white mb-4">
+            <div className="font-display text-xl font-bold text-white mb-4">
               {s?.logo_url ? (
-                <img src={s.logo_url} alt={s.company_name} className="h-8 w-auto" />
+                <img src={s.logo_url} alt={companyName} className="h-8 w-auto" />
               ) : (
-                <><span className="text-accent">●</span> {s?.company_name || "Desentupidora Precisão"}</>
+                <><span className="text-accent">●</span> {companyName}</>
               )}
-            </h3>
+            </div>
             <p className="text-sm leading-relaxed">
               Especialistas em desentupimento em Belo Horizonte e região metropolitana. Atendimento 24 horas com profissionais qualificados.
             </p>
@@ -46,19 +48,19 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-white mb-4">Contato</h4>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-accent" /> {s?.phone}</li>
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-accent" /> {s?.email}</li>
-              <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" /> {s?.address}</li>
-              <li className="flex items-center gap-2"><Clock className="h-4 w-4 text-accent" /> 24 horas, 7 dias por semana</li>
+              <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-accent shrink-0" /> {s?.phone}</li>
+              <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-accent shrink-0" /> {s?.email}</li>
+              <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-accent shrink-0" /> {s?.address}</li>
+              <li className="flex items-center gap-2"><Clock className="h-4 w-4 text-accent shrink-0" /> 24h, 7 dias</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40">
-          <span>© {new Date().getFullYear()} {s?.company_name}. Todos os direitos reservados.</span>
+          <span>© {new Date().getFullYear()} {companyName}. Todos os direitos reservados.</span>
           <div className="flex gap-4">
-            <Link to="/sobre" className="hover:text-white/60">Sobre</Link>
-            <Link to="/contato" className="hover:text-white/60">Contato</Link>
+            <Link to="/sobre" className="hover:text-white/60 transition-colors">Sobre</Link>
+            <Link to="/contato" className="hover:text-white/60 transition-colors">Contato</Link>
           </div>
         </div>
       </div>
