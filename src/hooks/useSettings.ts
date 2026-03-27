@@ -26,6 +26,8 @@ export interface SiteSettings {
   google_reviews_count: string;
   total_services_count: string;
   years_experience: string;
+  about_image_url: string;
+  about_text: string;
 }
 
 export interface SiteSettings {
