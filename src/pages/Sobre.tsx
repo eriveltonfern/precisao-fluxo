@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
-import teamImg from "@/assets/team-about.jpg";
+
 
 const stats = [
   { icon: Clock, label: "Anos de experiência", value: "+10" },
@@ -41,12 +41,16 @@ const Sobre = () => {
           <div>
             <h2 className="font-display text-2xl font-extrabold text-foreground md:text-3xl mb-6">Nossa história</h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>A {s?.company_name} nasceu da necessidade de oferecer um serviço de desentupimento realmente profissional em Belo Horizonte. Cansados de ver clientes mal atendidos e serviços mal executados, decidimos criar uma empresa que prioriza qualidade, rapidez e transparência.</p>
-              <p>Hoje, somos referência em desentupimento na região metropolitana de BH, com uma equipe de profissionais treinados e equipamentos de última geração. Nosso compromisso é resolver seu problema no menor tempo possível, sem surpresas no orçamento.</p>
-              <p>Funcionamos 24 horas por dia, 7 dias por semana, porque entendemos que emergências não escolhem horário. Cada atendimento é tratado com a mesma dedicação e profissionalismo que nos trouxe até aqui.</p>
+              <p>{s?.about_text || "A Desentupidora Precisão Ltda é uma empresa especializada em serviços de desentupimento e manutenção preventiva."}</p>
+              <p>Todos os atendimentos são realizados mediante avaliação técnica, com orçamento previamente informado e autorizado pelo cliente, conforme previsto no Código de Defesa do Consumidor (Lei nº 8.078/90).</p>
+              <p>Funcionamos 24 horas por dia, 7 dias por semana, atendendo Belo Horizonte e toda a Região Metropolitana de Minas Gerais.</p>
             </div>
           </div>
-          <img src={teamImg} alt={`Equipe ${s?.company_name}`} width={800} height={600} loading="lazy" className="rounded-2xl shadow-lg" />
+          {s?.about_image_url ? (
+            <img src={s.about_image_url} alt={`Equipe ${s.company_name}`} width={800} height={600} loading="lazy" className="rounded-2xl shadow-lg" />
+          ) : (
+            <div className="flex items-center justify-center rounded-2xl bg-muted h-80 text-muted-foreground text-sm">Imagem não configurada</div>
+          )}
         </div>
       </section>
 

@@ -98,6 +98,36 @@ export type Database = {
         }
         Relationships: []
       }
+      clients: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean | null
+          logo_url: string
+          name: string
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          logo_url: string
+          name: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          logo_url?: string
+          name?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       portfolio_items: {
         Row: {
           created_at: string
