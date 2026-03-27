@@ -12,20 +12,26 @@ import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import SeoHead from "@/components/SeoHead";
+import { useSettings } from "@/hooks/useSettings";
 
 const Index = () => {
+  const { data: s } = useSettings();
+
   useEffect(() => {
+    if (!s) return;
+
     const schema = {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      name: "Desentupidora Precisão",
-      description: "Desentupidora em Belo Horizonte 24h. Desentupimento de pia, esgoto, vaso sanitário, limpeza de fossa e hidrojateamento.",
-      url: window.location.origin,
-      telephone: "+5531999999999",
+      name: s.company_name,
+      description: s.seo_description,
+      url: s.seo_canonical || window.location.origin,
+      telephone: `+55${s.whatsapp_number}`,
       address: { "@type": "PostalAddress", addressLocality: "Belo Horizonte", addressRegion: "MG", addressCountry: "BR" },
       geo: { "@type": "GeoCoordinates", latitude: -19.92, longitude: -43.94 },
       openingHoursSpecification: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], opens: "00:00", closes: "23:59" },
-      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "287" },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: s.google_rating, reviewCount: s.google_reviews_count },
       areaServed: ["Belo Horizonte","Contagem","Betim","Nova Lima","Sabará","Santa Luzia"],
     };
 
@@ -50,10 +56,11 @@ const Index = () => {
     const s1 = addSchema(schema);
     const s2 = addSchema(faqSchema);
     return () => { s1.remove(); s2.remove(); };
-  }, []);
+  }, [s]);
 
   return (
     <div className="min-h-screen">
+      <SeoHead />
       <Header />
       <HeroSection />
       <AuthoritySection />
