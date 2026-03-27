@@ -3,7 +3,7 @@ import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
 
 const CTASection = () => {
   const { data: s } = useSettings();
-  if (!s) return null;
+  const waLink = s ? getWhatsAppLink(s) : "#";
 
   return (
     <section id="contato" className="py-20 md:py-28 bg-primary relative overflow-hidden">
@@ -17,7 +17,7 @@ const CTASection = () => {
         <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">
           Não espere o problema piorar. Fale conosco agora mesmo e receba um orçamento grátis em minutos.
         </p>
-        <a href={getWhatsAppLink(s)} target="_blank" rel="noopener noreferrer"
+        <a href={waLink} target="_blank" rel="noopener noreferrer"
           className="mt-8 inline-flex items-center gap-3 rounded-xl bg-accent px-10 py-5 text-xl font-bold text-accent-foreground shadow-lg shadow-accent/30 transition-all hover:bg-red-700 hover:shadow-xl hover:scale-105">
           <MessageCircle className="h-7 w-7" /> Falar no WhatsApp Agora
         </a>

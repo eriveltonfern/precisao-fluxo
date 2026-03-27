@@ -2,9 +2,26 @@ import { MessageCircle, Phone } from "lucide-react";
 import heroImg from "@/assets/hero-plumber.jpg";
 import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
 
+const HeroSkeleton = () => (
+  <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-primary-dark">
+    <div className="container relative z-10 py-32 md:py-40">
+      <div className="max-w-2xl space-y-6">
+        <div className="h-8 w-48 rounded-full bg-white/10 animate-pulse" />
+        <div className="h-14 w-full rounded-lg bg-white/10 animate-pulse" />
+        <div className="h-6 w-3/4 rounded bg-white/10 animate-pulse" />
+        <div className="flex gap-4">
+          <div className="h-14 w-48 rounded-xl bg-white/10 animate-pulse" />
+          <div className="h-14 w-48 rounded-xl bg-white/10 animate-pulse" />
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 const HeroSection = () => {
-  const { data: s } = useSettings();
-  if (!s) return null;
+  const { data: s, isLoading } = useSettings();
+
+  if (isLoading || !s) return <HeroSkeleton />;
 
   const waLink = getWhatsAppLink(s);
   const bgImage = s.hero_image_url || heroImg;
