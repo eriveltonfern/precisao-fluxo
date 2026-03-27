@@ -4,6 +4,8 @@ import HeroSection from "@/components/HeroSection";
 import AuthoritySection from "@/components/AuthoritySection";
 import ServicesSection from "@/components/ServicesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
+import ClientsSection from "@/components/ClientsSection";
+import PortfolioSection from "@/components/PortfolioSection";
 import CoverageSection from "@/components/CoverageSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
@@ -13,7 +15,6 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   useEffect(() => {
-    // JSON-LD LocalBusiness schema
     const schema = {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
@@ -21,19 +22,9 @@ const Index = () => {
       description: "Desentupidora em Belo Horizonte 24h. Desentupimento de pia, esgoto, vaso sanitário, limpeza de fossa e hidrojateamento.",
       url: window.location.origin,
       telephone: "+5531999999999",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Belo Horizonte",
-        addressRegion: "MG",
-        addressCountry: "BR",
-      },
+      address: { "@type": "PostalAddress", addressLocality: "Belo Horizonte", addressRegion: "MG", addressCountry: "BR" },
       geo: { "@type": "GeoCoordinates", latitude: -19.92, longitude: -43.94 },
-      openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-        opens: "00:00",
-        closes: "23:59",
-      },
+      openingHoursSpecification: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], opens: "00:00", closes: "23:59" },
       aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "287" },
       areaServed: ["Belo Horizonte","Contagem","Betim","Nova Lima","Sabará","Santa Luzia"],
     };
@@ -68,6 +59,8 @@ const Index = () => {
       <AuthoritySection />
       <ServicesSection />
       <HowItWorksSection />
+      <ClientsSection />
+      <PortfolioSection />
       <CoverageSection />
       <TestimonialsSection />
       <FAQSection />

@@ -1,11 +1,6 @@
 import { MapPin } from "lucide-react";
-
-const cities = [
-  "Belo Horizonte", "Contagem", "Betim", "Nova Lima", "Sabará",
-  "Santa Luzia", "Ribeirão das Neves", "Ibirité", "Vespasiano",
-  "Lagoa Santa", "Pedro Leopoldo", "Matozinhos", "Confins",
-  "Brumadinho", "Sarzedo", "Caeté",
-];
+import { Link } from "react-router-dom";
+import { cities } from "@/data/cities";
 
 const CoverageSection = () => {
   return (
@@ -21,19 +16,20 @@ const CoverageSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {cities.map((city) => (
-            <div
-              key={city}
-              className="flex items-center gap-2 rounded-xl bg-white/10 px-4 py-3 text-sm font-medium backdrop-blur-sm border border-white/10"
+            <Link
+              key={city.slug}
+              to={`/desentupidora/${city.slug}`}
+              className="flex items-center gap-2 rounded-xl bg-white/10 px-4 py-3 text-sm font-medium backdrop-blur-sm border border-white/10 transition-all hover:bg-white/20 hover:border-white/20"
             >
               <MapPin className="h-4 w-4 text-accent shrink-0" />
-              {city}
-            </div>
+              {city.name}
+            </Link>
           ))}
         </div>
 
-        {/* Google Maps embed */}
+        {/* Google Maps */}
         <div className="mt-14 overflow-hidden rounded-2xl border border-white/10">
           <iframe
             title="Localização Desentupidora Precisão"
