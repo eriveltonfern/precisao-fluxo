@@ -17,6 +17,7 @@ import AdminServices from "./pages/admin/AdminServices.tsx";
 import AdminCities from "./pages/admin/AdminCities.tsx";
 import AdminBlog from "./pages/admin/AdminBlog.tsx";
 import AdminPortfolio from "./pages/admin/AdminPortfolio.tsx";
+import AdminClients from "./pages/admin/AdminClients.tsx";
 import AdminSettings from "./pages/admin/AdminSettings.tsx";
 
 const queryClient = new QueryClient();
