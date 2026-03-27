@@ -5,6 +5,8 @@ import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
 
 const ServicesSection = () => {
   const { data: services, isLoading } = useServices();
+  const { data: settings } = useSettings();
+  const waLink = settings ? getWhatsAppLink(settings) : "#";
 
   return (
     <section id="servicos" className="py-20 md:py-28 bg-secondary">
