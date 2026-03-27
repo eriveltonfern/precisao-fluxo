@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
-import teamImg from "@/assets/team-about.jpg";
+
 
 const stats = [
   { icon: Clock, label: "Anos de experiência", value: "+10" },
