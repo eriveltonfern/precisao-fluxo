@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { MessageCircle } from "lucide-react";
 import { useServices, getFallbackImage } from "@/hooks/useData";
+import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
 
 const ServicesSection = () => {
   const { data: services, isLoading } = useServices();
+  const { data: settings } = useSettings();
+  const waLink = settings ? getWhatsAppLink(settings) : "#";
 
   return (
     <section id="servicos" className="py-20 md:py-28 bg-secondary">
@@ -33,7 +37,11 @@ const ServicesSection = () => {
                   <div className="p-5">
                     <h3 className="font-display text-lg font-bold text-foreground">{service.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{service.description}</p>
-                    <span className="mt-3 inline-block text-sm font-semibold text-primary group-hover:underline">Saiba mais →</span>
+                    <a href={waLink} target="_blank" rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="mt-3 inline-flex items-center gap-2 rounded-lg bg-green-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-600">
+                      <MessageCircle className="h-4 w-4" /> WhatsApp
+                    </a>
                   </div>
                 </Link>
               ))}
