@@ -1,11 +1,12 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Navigate, Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, Wrench, MapPin, FileText, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Wrench, MapPin, FileText, Image, Settings, LogOut } from "lucide-react";
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Serviços", href: "/admin/servicos", icon: Wrench },
   { label: "Cidades", href: "/admin/cidades", icon: MapPin },
+  { label: "Portfólio", href: "/admin/portfolio", icon: Image },
   { label: "Blog", href: "/admin/blog", icon: FileText },
   { label: "Configurações", href: "/admin/configuracoes", icon: Settings },
 ];
