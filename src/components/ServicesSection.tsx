@@ -1,16 +1,6 @@
-import { Droplets, ShowerHead, Pipette, CircleDot, Trash2, Waves, Package, Clock } from "lucide-react";
 import { whatsappLink } from "./WhatsAppButton";
-
-const services = [
-  { icon: Pipette, title: "Desentupimento de Pia", desc: "Pia da cozinha ou banheiro, resolvemos rápido." },
-  { icon: Droplets, title: "Desentupimento de Esgoto", desc: "Desobstrução completa da rede de esgoto." },
-  { icon: ShowerHead, title: "Desentupimento de Vaso", desc: "Vaso sanitário entupido? Ligou, resolveu." },
-  { icon: CircleDot, title: "Desentupimento de Ralo", desc: "Ralos de banheiro, área de serviço e garagem." },
-  { icon: Trash2, title: "Limpeza de Fossa", desc: "Limpeza e manutenção de fossas sépticas." },
-  { icon: Waves, title: "Hidrojateamento", desc: "Alta pressão para desobstrução eficiente." },
-  { icon: Package, title: "Caixa de Gordura", desc: "Limpeza preventiva de caixas de gordura." },
-  { icon: Clock, title: "Desentupidora 24h", desc: "Emergência? Estamos disponíveis a qualquer hora." },
-];
+import { Link } from "react-router-dom";
+import { services } from "@/data/services";
 
 const ServicesSection = () => {
   return (
@@ -28,22 +18,29 @@ const ServicesSection = () => {
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => (
-            <a
-              key={service.title}
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-2xl bg-card p-6 shadow-sm border border-border transition-all hover:shadow-lg hover:border-primary/30 hover:-translate-y-1"
+            <Link
+              key={service.slug}
+              to={`/servicos/${service.slug}`}
+              className="group overflow-hidden rounded-2xl bg-card shadow-sm border border-border transition-all hover:shadow-lg hover:border-primary/30 hover:-translate-y-1"
             >
-              <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3">
-                <service.icon className="h-6 w-6 text-primary" />
+              <div className="overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  width={768}
+                  height={512}
+                  loading="lazy"
+                  className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
-              <h3 className="font-display text-lg font-bold text-foreground">{service.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{service.desc}</p>
-              <span className="mt-4 inline-block text-sm font-semibold text-primary group-hover:underline">
-                Solicitar orçamento →
-              </span>
-            </a>
+              <div className="p-5">
+                <h3 className="font-display text-lg font-bold text-foreground">{service.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{service.desc}</p>
+                <span className="mt-3 inline-block text-sm font-semibold text-primary group-hover:underline">
+                  Saiba mais →
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
