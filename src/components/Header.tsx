@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { whatsappLink } from "./WhatsAppButton";
+import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
 
 const navItems = [
   { label: "Início", href: "/#inicio" },
@@ -15,37 +15,37 @@ const navItems = [
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-
+  const { data: s } = useSettings();
+  const waLink = s ? getWhatsAppLink(s) : "#";
   const isInternal = (href: string) => !href.startsWith("/#");
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-primary-dark/95 backdrop-blur-md border-b border-white/10">
       <div className="container flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold text-primary-foreground md:text-xl">
-          <span className="text-accent">●</span> Desentupidora Precisão
+          {s?.logo_url ? (
+            <img src={s.logo_url} alt={s.company_name} className="h-8 w-auto" />
+          ) : (
+            <><span className="text-accent">●</span> {s?.company_name || "Desentupidora Precisão"}</>
+          )}
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden items-center gap-6 lg:flex">
           {navItems.map((item) =>
             isInternal(item.href) ? (
-              <Link key={item.href} to={item.href} className="text-sm font-medium text-white/80 transition-colors hover:text-white">
-                {item.label}
-              </Link>
+              <Link key={item.href} to={item.href} className="text-sm font-medium text-white/80 transition-colors hover:text-white">{item.label}</Link>
             ) : (
-              <a key={item.href} href={item.href} className="text-sm font-medium text-white/80 transition-colors hover:text-white">
-                {item.label}
-              </a>
+              <a key={item.href} href={item.href} className="text-sm font-medium text-white/80 transition-colors hover:text-white">{item.label}</a>
             )
           )}
         </nav>
 
         <div className="flex items-center gap-3">
-          <a href="tel:+553199999999"
+          <a href={`tel:+55${(s?.whatsapp_number || "").replace(/\D/g, "")}`}
             className="hidden items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20 md:flex">
-            <Phone className="h-4 w-4" /> (31) 9999-9999
+            <Phone className="h-4 w-4" /> {s?.phone || "(31) 9999-9999"}
           </a>
-          <a href={whatsappLink} target="_blank" rel="noopener noreferrer"
+          <a href={waLink} target="_blank" rel="noopener noreferrer"
             className="hidden rounded-lg bg-accent px-5 py-2.5 text-sm font-bold text-accent-foreground transition-colors hover:bg-red-700 md:block">
             Orçamento Grátis
           </a>
@@ -61,20 +61,14 @@ const Header = () => {
             {navItems.map((item) =>
               isInternal(item.href) ? (
                 <Link key={item.href} to={item.href} onClick={() => setOpen(false)}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white">
-                  {item.label}
-                </Link>
+                  className="rounded-lg px-4 py-3 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white">{item.label}</Link>
               ) : (
                 <a key={item.href} href={item.href} onClick={() => setOpen(false)}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white">
-                  {item.label}
-                </a>
+                  className="rounded-lg px-4 py-3 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white">{item.label}</a>
               )
             )}
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer"
-              className="mt-2 rounded-lg bg-accent px-4 py-3 text-center text-sm font-bold text-accent-foreground">
-              Orçamento Grátis
-            </a>
+            <a href={waLink} target="_blank" rel="noopener noreferrer"
+              className="mt-2 rounded-lg bg-accent px-4 py-3 text-center text-sm font-bold text-accent-foreground">Orçamento Grátis</a>
           </div>
         </nav>
       )}
