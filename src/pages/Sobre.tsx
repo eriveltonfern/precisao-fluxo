@@ -46,7 +46,11 @@ const Sobre = () => {
               <p>Funcionamos 24 horas por dia, 7 dias por semana, atendendo Belo Horizonte e toda a Região Metropolitana de Minas Gerais.</p>
             </div>
           </div>
-          <img src={teamImg} alt={`Equipe ${s?.company_name}`} width={800} height={600} loading="lazy" className="rounded-2xl shadow-lg" />
+          {s?.about_image_url ? (
+            <img src={s.about_image_url} alt={`Equipe ${s.company_name}`} width={800} height={600} loading="lazy" className="rounded-2xl shadow-lg" />
+          ) : (
+            <div className="flex items-center justify-center rounded-2xl bg-muted h-80 text-muted-foreground text-sm">Imagem não configurada</div>
+          )}
         </div>
       </section>
 

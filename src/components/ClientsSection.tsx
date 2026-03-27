@@ -1,12 +1,30 @@
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { Building2 } from "lucide-react";
 
-const clients = [
-  "Construtora MG", "Rede Supermercados BH", "Hospital Santa Casa",
-  "Shopping Del Rey", "Condomínio Alto da Serra", "Restaurante Sabor Mineiro",
-  "Hotel Belo Horizonte Palace", "Escola São José",
-];
+interface Client {
+  id: string;
+  name: string;
+  logo_url: string;
+}
 
 const ClientsSection = () => {
+  const { data: clients = [] } = useQuery({
+    queryKey: ["public-clients"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("clients")
+        .select("id, name, logo_url")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true });
+      if (error) throw error;
+      return data as Client[];
+    },
+    staleTime: 1000 * 60 * 10,
+  });
+
+  if (clients.length === 0) return null;
+
   return (
     <section className="py-16 md:py-20 bg-secondary">
       <div className="container">
@@ -19,12 +37,15 @@ const ClientsSection = () => {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
           {clients.map((client) => (
-            <div
-              key={client}
-              className="flex items-center justify-center gap-3 rounded-2xl border border-border bg-card px-5 py-6 shadow-sm"
-            >
-              <Building2 className="h-5 w-5 text-primary shrink-0" />
-              <span className="text-sm font-semibold text-foreground">{client}</span>
+            <div key={client.id}
+              className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-card px-5 py-6 shadow-sm">
+              {client.logo_url ? (
+                <img src={client.logo_url} alt={client.name} loading="lazy"
+                  className="h-12 w-auto max-w-[120px] object-contain" />
+              ) : (
+                <Building2 className="h-8 w-8 text-primary" />
+              )}
+              <span className="text-sm font-semibold text-foreground text-center">{client.name}</span>
             </div>
           ))}
         </div>

@@ -142,6 +142,12 @@ const AdminSettings = () => {
           <Field label="Subtítulo" value={form.hero_subtitle} onChange={update("hero_subtitle")} rows={2} />
         </Section>
 
+        {/* Sobre Nós */}
+        <Section title="Sobre Nós" icon={FileText}>
+          <ImageUpload label="Imagem da Seção Sobre Nós" value={form.about_image_url} onUpload={update("about_image_url")} path="about/company" />
+          <Field label="Texto Sobre a Empresa" value={form.about_text} onChange={update("about_text")} rows={5} />
+        </Section>
+
         {/* Prova Social */}
         <Section title="Prova Social" icon={Star}>
           <div className="grid gap-4 md:grid-cols-2">
