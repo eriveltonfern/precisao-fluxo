@@ -1,8 +1,10 @@
 import { MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { cities } from "@/data/cities";
+import { useCities } from "@/hooks/useData";
 
 const CoverageSection = () => {
+  const { data: cities, isLoading } = useCities();
+
   return (
     <section id="atendimento" className="py-20 md:py-28 bg-primary-dark text-primary-foreground">
       <div className="container">
@@ -17,19 +19,20 @@ const CoverageSection = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {cities.map((city) => (
-            <Link
-              key={city.slug}
-              to={`/desentupidora/${city.slug}`}
-              className="flex items-center gap-2 rounded-xl bg-white/10 px-4 py-3 text-sm font-medium backdrop-blur-sm border border-white/10 transition-all hover:bg-white/20 hover:border-white/20"
-            >
-              <MapPin className="h-4 w-4 text-accent shrink-0" />
-              {city.name}
-            </Link>
-          ))}
+          {isLoading
+            ? [...Array(10)].map((_, i) => <div key={i} className="h-12 rounded-xl bg-white/10 animate-pulse" />)
+            : cities?.map((city) => (
+                <Link
+                  key={city.slug}
+                  to={`/desentupidora/${city.slug}`}
+                  className="flex items-center gap-2 rounded-xl bg-white/10 px-4 py-3 text-sm font-medium backdrop-blur-sm border border-white/10 transition-all hover:bg-white/20 hover:border-white/20"
+                >
+                  <MapPin className="h-4 w-4 text-accent shrink-0" />
+                  {city.name}
+                </Link>
+              ))}
         </div>
 
-        {/* Google Maps */}
         <div className="mt-14 overflow-hidden rounded-2xl border border-white/10">
           <iframe
             title="Localização Desentupidora Precisão"

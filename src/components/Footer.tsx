@@ -1,9 +1,11 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { services } from "@/data/services";
-import { cities } from "@/data/cities";
+import { useServices, useCities } from "@/hooks/useData";
 
 const Footer = () => {
+  const { data: services } = useServices();
+  const { data: cities } = useCities();
+
   return (
     <footer className="bg-primary-dark text-white/80 pt-16 pb-8">
       <div className="container">
@@ -20,7 +22,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-white mb-4">Serviços</h4>
             <ul className="space-y-2 text-sm">
-              {services.slice(0, 6).map((s) => (
+              {services?.slice(0, 6).map((s) => (
                 <li key={s.slug}>
                   <Link to={`/servicos/${s.slug}`} className="hover:text-white transition-colors">{s.title}</Link>
                 </li>
@@ -31,7 +33,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-white mb-4">Cidades</h4>
             <ul className="space-y-2 text-sm">
-              {cities.slice(0, 6).map((c) => (
+              {cities?.slice(0, 6).map((c) => (
                 <li key={c.slug}>
                   <Link to={`/desentupidora/${c.slug}`} className="hover:text-white transition-colors">{c.name}</Link>
                 </li>
