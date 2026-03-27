@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+import { MessageCircle } from "lucide-react";
 import { useServices, getFallbackImage } from "@/hooks/useData";
+import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
 
 const ServicesSection = () => {
   const { data: services, isLoading } = useServices();
