@@ -85,3 +85,18 @@ export const useCity = (slug: string | undefined) => {
     enabled: !!slug,
   });
 };
+
+export const usePortfolioItems = () => {
+  return useQuery({
+    queryKey: ["portfolio-items"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("portfolio_items")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order");
+      if (error) throw error;
+      return data;
+    },
+  });
+};
