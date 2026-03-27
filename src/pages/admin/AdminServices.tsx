@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Plus, Pencil, Trash2, X } from "lucide-react";
+import { uploadSiteAsset } from "@/hooks/useUpload";
+import { Plus, Pencil, Trash2, X, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 interface ServiceForm {
@@ -26,6 +27,8 @@ const AdminServices = () => {
   const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState<ServiceForm>(emptyForm);
   const [showForm, setShowForm] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const { data: services, isLoading } = useQuery({
     queryKey: ["admin-services"],
@@ -35,6 +38,20 @@ const AdminServices = () => {
       return data;
     },
   });
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const url = await uploadSiteAsset(file, `services/${form.slug || Date.now()}`);
+      setForm((f) => ({ ...f, image_url: url }));
+      toast.success("Imagem enviada e otimizada!");
+    } catch {
+      toast.error("Erro ao enviar imagem");
+    }
+    setUploading(false);
+  };
 
   const saveMutation = useMutation({
     mutationFn: async (f: ServiceForm) => {
@@ -122,6 +139,23 @@ const AdminServices = () => {
                 className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm" />
             </div>
             <div className="sm:col-span-2">
+              <label className="block text-sm font-medium text-foreground mb-1">Imagem do Serviço</label>
+              <div className="flex items-center gap-4">
+                {form.image_url && (
+                  <img src={form.image_url} alt="Preview" className="h-20 w-32 rounded-lg border border-border object-cover" />
+                )}
+                <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading}
+                  className="inline-flex items-center gap-2 rounded-lg border border-input bg-background px-4 py-2.5 text-sm font-medium text-foreground hover:bg-muted disabled:opacity-50">
+                  <Upload className="h-4 w-4" /> {uploading ? "Otimizando..." : "Enviar imagem"}
+                </button>
+                <input ref={fileRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
+              </div>
+              {form.image_url && (
+                <input type="text" value={form.image_url} readOnly
+                  className="mt-2 w-full rounded-lg border border-input bg-muted px-3 py-1.5 text-xs text-muted-foreground" />
+              )}
+            </div>
+            <div className="sm:col-span-2">
               <label className="block text-sm font-medium text-foreground mb-1">Descrição Curta</label>
               <input value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} required
                 className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm" />
@@ -131,12 +165,7 @@ const AdminServices = () => {
               <textarea value={form.long_description} onChange={(e) => setForm({ ...form, long_description: e.target.value })} required rows={4}
                 className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm" />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-1">URL da Imagem</label>
-              <input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })}
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm" />
-            </div>
-            <div>
+            <div className="sm:col-span-2">
               <label className="block text-sm font-medium text-foreground mb-1">Keywords (separadas por vírgula)</label>
               <input value={form.keywords} onChange={(e) => setForm({ ...form, keywords: e.target.value })}
                 className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm" />
@@ -164,6 +193,7 @@ const AdminServices = () => {
           <table className="w-full text-sm">
             <thead className="bg-secondary">
               <tr>
+                <th className="text-left px-4 py-3 font-medium text-muted-foreground">Imagem</th>
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Título</th>
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Slug</th>
                 <th className="text-center px-4 py-3 font-medium text-muted-foreground">Ativo</th>
@@ -174,6 +204,13 @@ const AdminServices = () => {
             <tbody className="divide-y divide-border">
               {services.map((s) => (
                 <tr key={s.id} className="hover:bg-secondary/50">
+                  <td className="px-4 py-3">
+                    {s.image_url ? (
+                      <img src={s.image_url} alt={s.title} className="h-10 w-16 rounded border border-border object-cover" />
+                    ) : (
+                      <span className="text-xs text-muted-foreground">Sem imagem</span>
+                    )}
+                  </td>
                   <td className="px-4 py-3 font-medium text-foreground">{s.title}</td>
                   <td className="px-4 py-3 text-muted-foreground">{s.slug}</td>
                   <td className="px-4 py-3 text-center">{s.is_active ? "✅" : "❌"}</td>

@@ -16,6 +16,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
 import AdminServices from "./pages/admin/AdminServices.tsx";
 import AdminCities from "./pages/admin/AdminCities.tsx";
 import AdminBlog from "./pages/admin/AdminBlog.tsx";
+import AdminPortfolio from "./pages/admin/AdminPortfolio.tsx";
 import AdminSettings from "./pages/admin/AdminSettings.tsx";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="servicos" element={<AdminServices />} />
               <Route path="cidades" element={<AdminCities />} />
               <Route path="blog" element={<AdminBlog />} />
+              <Route path="portfolio" element={<AdminPortfolio />} />
               <Route path="configuracoes" element={<AdminSettings />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

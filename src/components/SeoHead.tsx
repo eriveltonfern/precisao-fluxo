@@ -1,15 +1,24 @@
 import { useEffect } from "react";
 import { useSettings } from "@/hooks/useSettings";
 
-const SeoHead = () => {
+interface SeoHeadProps {
+  title?: string;
+  description?: string;
+}
+
+const SeoHead = ({ title, description }: SeoHeadProps) => {
   const { data: s } = useSettings();
 
   useEffect(() => {
     if (!s) return;
 
-    document.title = s.seo_title;
+    const pageTitle = title || s.seo_title;
+    const pageDesc = description || s.seo_description;
+
+    document.title = pageTitle;
 
     const setMeta = (attr: string, key: string, content: string) => {
+      if (!content) return;
       let el = document.querySelector(`meta[${attr}="${key}"]`) as HTMLMetaElement | null;
       if (!el) {
         el = document.createElement("meta");
@@ -19,9 +28,9 @@ const SeoHead = () => {
       el.content = content;
     };
 
-    setMeta("name", "description", s.seo_description);
-    setMeta("property", "og:title", s.og_title);
-    setMeta("property", "og:description", s.og_description);
+    setMeta("name", "description", pageDesc);
+    setMeta("property", "og:title", title || s.og_title || pageTitle);
+    setMeta("property", "og:description", description || s.og_description || pageDesc);
     if (s.og_image) setMeta("property", "og:image", s.og_image);
 
     // Canonical
@@ -43,7 +52,7 @@ const SeoHead = () => {
       }
       favicon.href = s.favicon_url;
     }
-  }, [s]);
+  }, [s, title, description]);
 
   return null;
 };
