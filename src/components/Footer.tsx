@@ -40,11 +40,11 @@ const Footer = () => {
             </p>
             <ul className="space-y-1.5 text-xs text-white/60">
               <li className="flex items-start gap-2">
-                <Building2 className="h-3.5 w-3.5 mt-0.5 shrink-0 text-warning/70" />
+                <Building2 className="h-3.5 w-3.5 mt-0.5 shrink-0 text-warning-light" />
                 <span>Desentupidora Precisão Ltda</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="shrink-0 text-warning/70 font-bold text-[10px] mt-0.5">CNPJ</span>
+                <span className="shrink-0 text-warning-light font-bold text-[10px] mt-0.5">CNPJ</span>
                 <span>33.770.939/0001-94</span>
               </li>
             </ul>
@@ -55,7 +55,7 @@ const Footer = () => {
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-white mb-4">Serviços</h4>
             <ul className="space-y-2 text-sm">
               {services?.slice(0, 6).map((sv) => (
-                <li key={sv.slug}><Link to={`/servicos/${sv.slug}`} className="hover:text-white transition-colors">{sv.title}</Link></li>
+                <li key={sv.slug}><Link to={`/servicos/${sv.slug}`} className="hover:text-warning-light transition-colors">{sv.title}</Link></li>
               ))}
             </ul>
           </div>
@@ -65,7 +65,7 @@ const Footer = () => {
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-white mb-4">Cidades</h4>
             <ul className="space-y-2 text-sm">
               {cities?.slice(0, 6).map((c) => (
-                <li key={c.slug}><Link to={`/desentupidora/${c.slug}`} className="hover:text-white transition-colors">{c.name}</Link></li>
+                <li key={c.slug}><Link to={`/desentupidora/${c.slug}`} className="hover:text-warning-light transition-colors">{c.name}</Link></li>
               ))}
             </ul>
           </div>
@@ -75,19 +75,19 @@ const Footer = () => {
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-white mb-4">Contato</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
-                <Phone className="h-4 w-4 text-warning shrink-0 mt-0.5" />
-                <a href="tel:+5531999798413" className="hover:text-white transition-colors">(31) 9 9979-8413</a>
+                <Phone className="h-4 w-4 text-warning-light shrink-0 mt-0.5" />
+                <a href="tel:+5531999798413" className="hover:text-warning-light transition-colors">(31) 9 9979-8413</a>
               </li>
               <li className="flex items-start gap-2">
-                <Mail className="h-4 w-4 text-warning shrink-0 mt-0.5" />
-                <a href="mailto:comercialdesentupidoraprecisao@gmail.com" className="hover:text-white transition-colors break-all text-xs sm:text-sm">comercialdesentupidoraprecisao@gmail.com</a>
+                <Mail className="h-4 w-4 text-warning-light shrink-0 mt-0.5" />
+                <a href="mailto:comercialdesentupidoraprecisao@gmail.com" className="hover:text-warning-light transition-colors break-all text-xs sm:text-sm">comercialdesentupidoraprecisao@gmail.com</a>
               </li>
               <li className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 text-warning shrink-0 mt-0.5" />
+                <MapPin className="h-4 w-4 text-warning-light shrink-0 mt-0.5" />
                 <span>Rua Lúcia Fonseca, nº 205 – Caieiras, Vespasiano/MG – CEP 33200-166</span>
               </li>
               <li className="flex items-start gap-2">
-                <Clock className="h-4 w-4 text-warning shrink-0 mt-0.5" />
+                <Clock className="h-4 w-4 text-warning-light shrink-0 mt-0.5" />
                 <span>24h, 7 dias por semana</span>
               </li>
             </ul>
@@ -105,8 +105,8 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 text-xs text-white/40">
             <span className="text-center md:text-left">© {new Date().getFullYear()} {companyName} — CNPJ 33.770.939/0001-94. Todos os direitos reservados.</span>
             <div className="flex gap-4">
-              <Link to="/sobre" className="hover:text-white/60 transition-colors">Sobre</Link>
-              <Link to="/contato" className="hover:text-white/60 transition-colors">Contato</Link>
+              <Link to="/sobre" className="hover:text-warning-light transition-colors">Sobre</Link>
+              <Link to="/contato" className="hover:text-warning-light transition-colors">Contato</Link>
             </div>
           </div>
         </div>

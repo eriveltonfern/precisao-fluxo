@@ -48,11 +48,11 @@ const HeroSection = () => {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
             <a href={waLink} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 sm:gap-3 rounded-xl bg-accent px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-bold text-accent-foreground shadow-lg shadow-accent/30 transition-all hover:bg-accent/90 hover:shadow-xl">
+              className="inline-flex items-center justify-center gap-2 sm:gap-3 rounded-xl bg-accent px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-bold text-accent-foreground shadow-lg shadow-accent/30 transition-all hover:bg-accent/80 hover:shadow-xl">
               <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" /> Falar no WhatsApp
             </a>
             <a href={`tel:+55${s.whatsapp_number.replace(/\D/g, "")}`}
-              className="inline-flex items-center justify-center gap-2 sm:gap-3 rounded-xl border-2 border-white/30 bg-white/10 px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20">
+              className="inline-flex items-center justify-center gap-2 sm:gap-3 rounded-xl bg-primary px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-bold text-primary-foreground backdrop-blur-sm transition-all hover:bg-primary/80">
               <Phone className="h-5 w-5" /> {s.phone}
             </a>
           </div>
