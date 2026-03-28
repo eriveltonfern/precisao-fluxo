@@ -7,42 +7,50 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 214 55% 14%;
+    --foreground: 215 28% 17%;
 
     --card: 0 0% 100%;
-    --card-foreground: 214 55% 14%;
+    --card-foreground: 215 28% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 214 55% 14%;
+    --popover-foreground: 215 28% 17%;
 
-    /* Logo dark navy blue */
-    --primary: 213 100% 25%;
+    /* Azul principal #005AA9 */
+    --primary: 209 100% 33%;
     --primary-foreground: 0 0% 100%;
 
-    /* Logo deepest navy */
-    --primary-dark: 213 100% 13%;
+    /* Azul escuro #0A3D62 */
+    --primary-dark: 205 81% 21%;
     --primary-dark-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 214 55% 14%;
+    /* Cinza claro de fundo #F5F7FA */
+    --secondary: 216 33% 97%;
+    --secondary-foreground: 215 28% 17%;
 
-    --muted: 210 40% 96%;
+    --muted: 216 33% 97%;
     --muted-foreground: 215 16% 47%;
 
-    /* Logo red */
-    --accent: 4 70% 46%;
+    /* Vermelho principal #D62828 */
+    --accent: 0 72% 50%;
     --accent-foreground: 0 0% 100%;
 
-    /* Logo amber/yellow */
-    --warning: 38 92% 55%;
-    --warning-foreground: 0 0% 100%;
+    /* Vermelho escuro #A61E1E */
+    --accent-dark: 0 70% 38%;
 
-    --destructive: 4 70% 55%;
+    /* Amarelo destaque #F4C430 */
+    --warning: 46 90% 57%;
+    --warning-foreground: 221 39% 11%;
+
+    /* Amarelo suave #FFE082 */
+    --warning-light: 43 100% 75%;
+
+    --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 213 100% 25%;
+    /* Cinza médio #D9E1E8 */
+    --border: 208 22% 88%;
+    --input: 208 22% 88%;
+    --ring: 209 100% 33%;
 
     --radius: 0.75rem;
 
@@ -53,7 +61,7 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 213 100% 40%;
+    --sidebar-ring: 209 100% 33%;
   }
 }
 
@@ -72,7 +80,6 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
-  /* Smooth scrolling for anchor links */
   html {
     scroll-behavior: smooth;
   }
