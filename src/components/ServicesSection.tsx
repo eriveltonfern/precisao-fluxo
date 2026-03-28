@@ -9,19 +9,19 @@ const ServicesSection = () => {
   const waLink = settings ? getWhatsAppLink(settings) : "#";
 
   return (
-    <section id="servicos" className="py-20 md:py-28 bg-secondary">
+    <section id="servicos" className="py-16 sm:py-20 md:py-28 bg-secondary">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center mb-14">
+        <div className="mx-auto max-w-2xl text-center mb-10 sm:mb-14">
           <span className="text-sm font-bold uppercase tracking-wider text-primary">Nossos Serviços</span>
-          <h2 className="mt-3 font-display text-3xl font-extrabold text-foreground md:text-4xl">
+          <h2 className="mt-3 font-display text-2xl sm:text-3xl font-extrabold text-foreground md:text-4xl">
             Soluções completas em desentupimento
           </h2>
-          <p className="mt-4 text-muted-foreground">
+          <p className="mt-4 text-sm sm:text-base text-muted-foreground">
             Oferecemos todos os tipos de desentupimento com equipamentos modernos e profissionais experientes.
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {isLoading
             ? [...Array(8)].map((_, i) => (
                 <div key={i} className="rounded-2xl bg-card border border-border h-72 animate-pulse" />
@@ -32,14 +32,14 @@ const ServicesSection = () => {
                   <div className="overflow-hidden">
                     <img src={service.image_url || getFallbackImage(service.slug)} alt={service.title}
                       width={768} height={512} loading="lazy"
-                      className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                      className="h-36 sm:h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                   </div>
-                  <div className="p-5">
-                    <h3 className="font-display text-lg font-bold text-foreground">{service.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{service.description}</p>
+                  <div className="p-4 sm:p-5">
+                    <h3 className="font-display text-base sm:text-lg font-bold text-foreground">{service.title}</h3>
+                    <p className="mt-2 text-xs sm:text-sm text-muted-foreground line-clamp-2">{service.description}</p>
                     <a href={waLink} target="_blank" rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="mt-3 inline-flex items-center gap-2 rounded-lg bg-green-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-600">
+                      className="mt-3 inline-flex items-center gap-2 rounded-lg bg-green-500 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-green-600">
                       <MessageCircle className="h-4 w-4" /> WhatsApp
                     </a>
                   </div>
