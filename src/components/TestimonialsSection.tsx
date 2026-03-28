@@ -11,31 +11,31 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section id="depoimentos" className="py-20 md:py-28 bg-secondary">
+    <section id="depoimentos" className="py-16 sm:py-20 md:py-28 bg-secondary">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center mb-14">
+        <div className="mx-auto max-w-2xl text-center mb-10 sm:mb-14">
           <span className="text-sm font-bold uppercase tracking-wider text-primary">Depoimentos</span>
-          <h2 className="mt-3 font-display text-3xl font-extrabold text-foreground md:text-4xl">
+          <h2 className="mt-3 font-display text-2xl sm:text-3xl font-extrabold text-foreground md:text-4xl">
             O que nossos clientes dizem
           </h2>
           <div className="mt-4 flex items-center justify-center gap-2">
-            <div className="flex text-yellow-400">
-              {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-current" />)}
+            <div className="flex text-warning">
+              {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 fill-current" />)}
             </div>
             <span className="font-bold text-foreground">4.9</span>
-            <span className="text-muted-foreground">no Google</span>
+            <span className="text-muted-foreground text-sm">no Google</span>
           </div>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t) => (
-            <div key={t.name} className="rounded-2xl bg-card p-6 shadow-sm border border-border">
-              <div className="mb-3 flex text-yellow-400">
+            <div key={t.name} className="rounded-2xl bg-card p-5 sm:p-6 shadow-sm border border-border">
+              <div className="mb-3 flex text-warning">
                 {[...Array(t.rating)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">"{t.text}"</p>
               <div className="mt-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                   {t.name.charAt(0)}
                 </div>
                 <div>
