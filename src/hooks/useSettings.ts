@@ -59,6 +59,9 @@ const DEFAULTS: SiteSettings = {
   years_experience: "+10 anos de experiência",
   about_image_url: "",
   about_text: "A Desentupidora Precisão Ltda é uma empresa especializada em serviços de desentupimento e manutenção preventiva. Todos os atendimentos são realizados mediante avaliação técnica, com orçamento previamente informado e autorizado pelo cliente, conforme previsto no Código de Defesa do Consumidor (Lei nº 8.078/90).",
+  gtm_id: "",
+  gtm_head_code: "",
+  gtm_body_code: "",
 };
 
 export const useSettings = () => {
