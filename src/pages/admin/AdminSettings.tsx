@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSettings, useSaveSettings, SiteSettings, SETTING_DEFAULTS } from "@/hooks/useSettings";
 import { uploadSiteAsset } from "@/hooks/useUpload";
 import { toast } from "sonner";
-import { Save, Upload, Image, Globe, FileText, Smartphone, Star } from "lucide-react";
+import { Save, Upload, Image, Globe, FileText, Smartphone, Star, Code } from "lucide-react";
 
 const Section = ({ title, icon: Icon, children }: { title: string; icon: React.ElementType; children: React.ReactNode }) => (
   <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
