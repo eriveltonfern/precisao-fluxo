@@ -28,34 +28,9 @@ export interface SiteSettings {
   years_experience: string;
   about_image_url: string;
   about_text: string;
-}
-
-export interface SiteSettings {
-  logo_url: string;
-  favicon_url: string;
-  company_name: string;
-  phone: string;
-  whatsapp_number: string;
-  whatsapp_message: string;
-  email: string;
-  address: string;
-  seo_title: string;
-  seo_description: string;
-  seo_canonical: string;
-  og_title: string;
-  og_description: string;
-  og_image: string;
-  hero_title: string;
-  hero_highlight: string;
-  hero_subtitle: string;
-  hero_image_url: string;
-  hero_badge_text: string;
-  google_rating: string;
-  google_reviews_count: string;
-  total_services_count: string;
-  years_experience: string;
-  about_image_url: string;
-  about_text: string;
+  gtm_id: string;
+  gtm_head_code: string;
+  gtm_body_code: string;
 }
 
 const DEFAULTS: SiteSettings = {
@@ -84,6 +59,9 @@ const DEFAULTS: SiteSettings = {
   years_experience: "+10 anos de experiência",
   about_image_url: "",
   about_text: "A Desentupidora Precisão Ltda é uma empresa especializada em serviços de desentupimento e manutenção preventiva. Todos os atendimentos são realizados mediante avaliação técnica, com orçamento previamente informado e autorizado pelo cliente, conforme previsto no Código de Defesa do Consumidor (Lei nº 8.078/90).",
+  gtm_id: "",
+  gtm_head_code: "",
+  gtm_body_code: "",
 };
 
 export const useSettings = () => {

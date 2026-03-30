@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
-import logo from "@/assets/logo.png";
+import localLogo from "@/assets/logo.png";
 
 const navItems = [
   { label: "Início", href: "/#inicio" },
@@ -24,7 +24,16 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <img src={s?.logo_url || logo} alt={s?.company_name || "Desentupidora Precisão"} className="h-10 w-auto md:h-12" />
+          <img
+            src={s?.logo_url || localLogo}
+            alt={s?.company_name || "Desentupidora Precisão"}
+            className="h-10 w-auto md:h-12"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            width={148}
+            height={48}
+          />
         </Link>
 
         <nav className="hidden items-center gap-5 xl:flex">

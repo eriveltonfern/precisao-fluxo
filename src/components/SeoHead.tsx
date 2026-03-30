@@ -54,6 +54,62 @@ const SeoHead = ({ title, description }: SeoHeadProps) => {
     }
   }, [s, title, description]);
 
+  // Google Tag Manager injection
+  useEffect(() => {
+    if (!s) return;
+
+    const cleanups: (() => void)[] = [];
+
+    // GTM via ID (standard method)
+    if (s.gtm_id && s.gtm_id.trim()) {
+      const gtmId = s.gtm_id.trim();
+
+      // Head script
+      if (!document.querySelector(`script[data-gtm-id="${gtmId}"]`)) {
+        const headScript = document.createElement("script");
+        headScript.setAttribute("data-gtm-id", gtmId);
+        headScript.textContent = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`;
+        document.head.appendChild(headScript);
+        cleanups.push(() => headScript.remove());
+      }
+
+      // Body noscript
+      if (!document.querySelector(`noscript[data-gtm-ns="${gtmId}"]`)) {
+        const noscript = document.createElement("noscript");
+        noscript.setAttribute("data-gtm-ns", gtmId);
+        noscript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+        document.body.insertBefore(noscript, document.body.firstChild);
+        cleanups.push(() => noscript.remove());
+      }
+    }
+
+    // Custom head code
+    if (s.gtm_head_code && s.gtm_head_code.trim()) {
+      const existing = document.querySelector('script[data-custom-head]');
+      if (!existing) {
+        const el = document.createElement("script");
+        el.setAttribute("data-custom-head", "true");
+        el.textContent = s.gtm_head_code.trim();
+        document.head.appendChild(el);
+        cleanups.push(() => el.remove());
+      }
+    }
+
+    // Custom body code
+    if (s.gtm_body_code && s.gtm_body_code.trim()) {
+      const existing = document.querySelector('div[data-custom-body]');
+      if (!existing) {
+        const el = document.createElement("div");
+        el.setAttribute("data-custom-body", "true");
+        el.innerHTML = s.gtm_body_code.trim();
+        document.body.insertBefore(el, document.body.firstChild);
+        cleanups.push(() => el.remove());
+      }
+    }
+
+    return () => cleanups.forEach((fn) => fn());
+  }, [s]);
+
   return null;
 };
 
