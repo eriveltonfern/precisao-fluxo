@@ -148,6 +148,22 @@ const AdminSettings = () => {
           <Field label="Texto Sobre a Empresa" value={form.about_text} onChange={update("about_text")} rows={5} />
         </Section>
 
+        {/* Google Tag Manager */}
+        <Section title="Google Tag Manager / Códigos de Rastreamento" icon={Code}>
+          <Field label="GTM ID (ex: GTM-XXXXXXX)" value={form.gtm_id} onChange={update("gtm_id")} placeholder="GTM-XXXXXXX" />
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1">Código extra no &lt;head&gt;</label>
+            <textarea value={form.gtm_head_code} onChange={(e) => update("gtm_head_code")(e.target.value)} rows={4} placeholder="Cole aqui scripts que devem ir no <head> (Google Analytics, etc.)"
+              className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1">Código extra no &lt;body&gt;</label>
+            <textarea value={form.gtm_body_code} onChange={(e) => update("gtm_body_code")(e.target.value)} rows={4} placeholder="Cole aqui scripts que devem ir logo após o <body> (noscript do GTM, etc.)"
+              className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
+          </div>
+          <p className="text-xs text-muted-foreground">Os códigos serão injetados automaticamente em todas as páginas do site.</p>
+        </Section>
+
         {/* Prova Social */}
         <Section title="Prova Social" icon={Star}>
           <div className="grid gap-4 md:grid-cols-2">
