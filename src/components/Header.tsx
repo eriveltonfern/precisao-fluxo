@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSettings, getWhatsAppLink } from "@/hooks/useSettings";
-import logo from "@/assets/logo.png";
+import localLogo from "@/assets/logo.png";
 
 const navItems = [
   { label: "Início", href: "/#inicio" },
